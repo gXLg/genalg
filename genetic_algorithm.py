@@ -251,10 +251,10 @@ cells.append ( Cell ( ))
 
 # creating display
 
-print ( "[?25l", end = "" )
+print ( "\x1b[?25l", end = "" )
 
 def display ( ) :
-  print ( "[1;1H( WORKING )" )
+  print ( "\x1b[1;1H( WORKING )" )
   if MAKE_DISPLAY_VIDEO or SHOW_DISPLAY :
     frame = [ ]
     for i in range ( len ( field )) :
@@ -265,37 +265,37 @@ def display ( ) :
         graphic = "--"
         if f == 0 : # water
           if ( i <= LIGHT_HEIGHT ) :
-            graphic = "[38;2;40;40;255m" # light
+            graphic = "\x1b[38;2;40;40;255m" # light
             frame_row.append ( [ 200, 200, 120 ])
           else :
-            graphic = "[38;2;0;0;200m" # shadow
+            graphic = "\x1b[38;2;0;0;200m" # shadow
             frame_row.append ( [ 120, 120, 60 ])
         elif f == 1 : # cell
           for k in cells :
             if k.cords == [ i, j ] :
               if k.kind == 0 : # fotosynth
-                graphic = "[38;2;0;255;0m"
+                graphic = "\x1b[38;2;0;255;0m"
                 frame_row.append ( [ 80, 180, 80 ])
               elif k.kind == 1 : # organics
-                graphic = "[38;2;255;200;0m"
+                graphic = "\x1b[38;2;255;200;0m"
                 frame_row.append ( [ 70, 200, 200 ])
               elif k.kind == 2 : # carnivorous
-                graphic = "[38;2;255;0;0m"
+                graphic = "\x1b[38;2;255;0;0m"
                 frame_row.append ( [ 20, 20, 120 ])
               break
         elif f == 2 : # food
-          graphic = "[38;2;100;100;100m"
+          graphic = "\x1b[38;2;100;100;100m"
           frame_row.append ( [ 150, 150, 150 ])
         elif f == 3 : # posion
-          graphic = "[38;2;200;0;255m"
+          graphic = "\x1b[38;2;200;0;255m"
           frame_row.append ( [ 250, 50, 250 ])
-        if SHOW_DISPLAY : print ( graphic + "â–ˆâ–ˆ", end = "" )
+        if SHOW_DISPLAY : print ( graphic + "@@", end = "" )
       frame.append ( frame_row )
       if SHOW_DISPLAY : print ( )
   if MAKE_DISPLAY_VIDEO :
     npframe = cv2.resize ( np ( frame, dtype = uint8 ), dim, interpolation = cv2.INTER_AREA )
     video.write ( npframe )
-  if SHOW_STAT or MAKE_DISPLAY_VIDEO or MAKE_STAT_VIDEO : print ( "[0m[J" )
+  if SHOW_STAT or MAKE_DISPLAY_VIDEO or MAKE_STAT_VIDEO : print ( "\x1b[0m\x1b[J" )
   if MAKE_DISPLAY_VIDEO :
     print ( "Display video
 - size :", round ( Path ( DISPLAY_VIDEO_NAME ).stat ( ).st_size / 1000000, 2 ), "MB
