@@ -255,7 +255,7 @@ cells.append ( Cell ( ))
 print ( "\x1b[?25l", end = "" )
 
 def display ( ) :
-  print ( "\x1b[1;1H( WORKING )" )
+  print ( "\x1b[1;1H( WORKING )\n" )
   if MAKE_DISPLAY_VIDEO or SHOW_DISPLAY :
     frame = [ ]
     for i in range ( len ( field )) :
