@@ -297,22 +297,15 @@ def display ( ) :
     video.write ( npframe )
   if SHOW_STAT or MAKE_DISPLAY_VIDEO or MAKE_STAT_VIDEO : print ( "\x1b[0m\x1b[J" )
   if MAKE_DISPLAY_VIDEO :
-    print ( "Display video
-- size :", round ( Path ( DISPLAY_VIDEO_NAME ).stat ( ).st_size / 1000000, 2 ), "MB
-- duration :", cycle // 120, "s" )
+    print ( "Display video\n- size :", round ( Path ( DISPLAY_VIDEO_NAME ).stat ( ).st_size / 1000000, 2 ), "MB\n- duration :", cycle // 120, "s" )
   if MAKE_STAT_VIDEO :
-    print ( "Statistics video
-- size :", round ( Path ( STAT_VIDEO_NAME ).stat ( ).st_size / 1000000, 2 ), "MB
-- duration :", cycle // 120, "s" )
+    print ( "Statistics video\n- size :", round ( Path ( STAT_VIDEO_NAME ).stat ( ).st_size / 1000000, 2 ), "MB\n- duration :", cycle // 120, "s" )
   if SHOW_STAT or MAKE_STAT_VIDEO :
-    print ( "
-Life cycle : ", cycle )
+    print ( "\nLife cycle : ", cycle )
     print ( "Amount of cells : ", len ( cells ))
     age = [ 0 ]
     for i in cells : age.append ( i.age )
-    print ( "
-Longest living cell
-- Age : ", max ( age ))
+    print ( "\nLongest living cell\n- Age : ", max ( age ))
     gen_s = [ ]
     kind = 0
     for i in cells :
@@ -352,7 +345,7 @@ Longest living cell
       video_stat.write ( npframe )
 
 def clean ( ) :
-  print ( "[?25h" )
+  print ( "\x1b[?25h" )
   display ( )
   if MAKE_DISPLAY_VIDEO : video.release ( )
   if MAKE_STAT_VIDEO : video_stat.release ( )
