@@ -34,6 +34,7 @@ if argv [ -1 ] == "modules" :
   print ( "Required modules :" )
   print ( "- opencv-python, used as cv2" )
   print ( "- numpy" )
+  exit ( )
 
 
 
